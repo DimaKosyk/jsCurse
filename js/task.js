@@ -160,7 +160,12 @@ const family = ['Peter', 'Ann', 'Alex', 'Linda'];
 function showFamily(arr) {
   let str = '';
 
-  arr.length === 0 ? str = 'Ceмья пуста' : str = 'Семья состоит из: ';
+  if(arr.length === 0){
+    str = "Ceмья пуста";
+  } else {
+    str = "Семья состоит из: ";
+  }
+  //arr.length === 0 ? str = "Ceмья пуста" : str = "Семья состоит из: ";
 
   arr.forEach(member => {
     str += `${member} `;
@@ -190,7 +195,13 @@ const additionalCurrencies = ['UAH', 'RUB', 'CNY'];
 const resultArray = [...baseCurrencies, ...additionalCurrencies];
 function availableCurr(arr, missingCurr) {
   let str = "";
-  arr.length === 0 ? str = "Нет доступных валют" : str = "Доступные валюты:\n";
+
+  if (arr.length === 0) {
+    str = "Нет доступных валют";
+  } else {
+    str = "Доступные валюты:\n";
+  }
+  //arr.length === 0 ? str = "Нет доступных валют" : str = "Доступные валюты:\n";
 
   arr.forEach(function (curr, i) {
     if(curr != missingCurr){
@@ -200,3 +211,66 @@ function availableCurr(arr, missingCurr) {
 
   return str;
 }
+
+const shoppingMallData = {
+  shops: [
+    {
+      width: 10,
+      length: 5
+    },
+    {
+      width: 15,
+      length: 7
+    },
+    {
+      width: 20,
+      length: 5
+    },
+    {
+      width: 8,
+      length: 10
+    }
+  ],
+  height: 5,
+  moneyPer1m3: 30,
+  budget: 50000
+};
+function isBudgetEnough(data) {
+  let areaShops = 0;
+  let sizeMall = 0;
+
+  data.shops.forEach(shop => {
+    areaShops += shop.width * shop.length;
+  });
+
+  sizeMall = areaShops * data.height;
+
+  if(data.budget > data.moneyPer1m3 * sizeMall){
+    return "Бюджета достаточно";
+  } else {
+    return "Бюджета недостаточно";
+  }
+}
+
+const students = ['Peter', 'Andrew', 'Ann', 'Mark', 'Josh', 'Sandra', 'Cris', 'Bernard', 'Takesi', 'Sam'];
+function sortStudentsByGroups(arr) {
+  arr.sort();
+
+  let a = [], b = [], c = [], str = [];
+
+  for(let i = 0; i < arr.length; i++){
+    if(i < 3){
+      a.push(arr[i]);
+    } else if(i < 6) {
+      b.push(arr[i]);
+    } else if(i < 9) {
+      c.push(arr[i]);
+    } else {
+      str.push(arr[i]);
+    }
+  }
+
+  return [a, b, c, `Оставшиеся студенты: ${str.length === 0 ? '-' : str.join(', ')}`];
+
+}
+
