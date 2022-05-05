@@ -1,3 +1,4 @@
+"use strict";
 function sayHello(userName) {
   return `Привет, ${userName}!`;
 }
@@ -274,3 +275,105 @@ function sortStudentsByGroups(arr) {
 
 }
 
+function factorial(num) {
+  if (typeof(num) != 'number' || !Number.isInteger(num)) {
+    return "Num is NaN";
+  }
+
+  if(num <= 0){
+    return 1;
+  }
+
+  return num * factorial(num - 1);
+}
+
+function amountOfPages(summary) {
+  let result = '';
+  let count = 0;
+
+  for(let i = 1; i <= summary; i++){
+    result += i;
+    if(result.length === summary){
+      count = i;
+      break;
+    }
+  }
+
+  return count;
+}
+
+function isPangram(string) {
+  return 'abcdefghijklmnopqrstuvwxyz'
+    .split("")
+    .every((x) => string.toLowerCase().includes(x));
+}
+
+function deepCount(a) {
+  let count = a.length;
+  
+  for(let i = 0; i < a.length; i++){
+    if(Array.isArray(a[i])){
+      count += deepCount(a[i]);
+    }
+  }
+
+  return count;
+}
+
+const films = [
+  {
+    name: 'Titanic',
+    rating: 9
+  },
+  {
+    name: 'Die hard 5',
+    rating: 5
+  },
+  {
+    name: 'Matrix',
+    rating: 8
+  },
+  {
+    name: 'Some bad film',
+    rating: 4
+  }
+];
+function showGoodFilms(arr) {
+  const newArr = arr.filter(film => film.rating >= 8);
+  return newArr;
+}
+function showListOfFilms(arr) {
+  const listFilm = arr.reduce((film, current) => `${typeof(film) === 'object' ? film.name : film}, ${current.name}`);
+  return listFilm;
+}
+function setFilmsIds(arr) {
+  return arr.map((film, i) => {
+    film.id = i;
+    return film;
+  });
+}
+const tranformedArray = setFilmsIds(films);
+function checkFilms(arr) {
+  return arr.every(film => film.id || film.id === 0);
+}
+
+const funds = [
+  { amount: -1400 },
+  { amount: 2400 },
+  { amount: -1000 },
+  { amount: 500 },
+  { amount: 10400 },
+  { amount: -11400 }
+];
+const getPositiveIncomeAmount = (data) => {
+  let sum = 0;
+  data.filter(item => {
+    if (item.amount >= 0){
+      sum += item.amount;
+    }
+  });
+  return sum;
+};
+const getTotalIncomeAmount = (data) => {
+  return data.some(item => item.amount < 0) ? data.reduce((acc, curr) => acc + curr.amount, 0) : getPositiveIncomeAmount(data);
+};
